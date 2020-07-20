@@ -1,0 +1,22 @@
+[Unit]
+Description=Tower Ansible project directory synch
+After=network.target
+After=systemd-user-sessions.service
+After=network-online.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/bash /usr/sbin/projectsync/projectsync.sh
+ExecStop=/usr/bin/echo 0 > /usr/sbin/projectsync/pid
+TimeoutStartSec=30
+
+# Restart:
+# The following setting will automatically restart ProjectSync
+# in the event of a failure. systemd service restarts are not a
+# replacement for service monitoring.
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
