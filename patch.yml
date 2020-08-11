@@ -1,20 +1,24 @@
 ---
-- name: installing updated packages
-  yum:
-    security: yes
-    name: '*'
-    state: latest
-    exclude: kernel*
-  register: patch_linux_updated
+- name: About to patch linux base server
+  hosts: "{{ hostname }}"
+  tasks:
+  
+  - name: installing updated packages
+    yum:
+      security: yes
+      name: '*'
+      state: latest
+      exclude: kernel*
+    register: patch_linux_updated
 
-- name: set fact if COMPLETE
-  set_fact:
-    linux_patching_fact: "complete"
-    cacheable: yes
-  when: patch_linux_updated.rc == 0
+  - name: set fact if COMPLETE
+    set_fact:
+      linux_patching_fact: "complete"
+      cacheable: yes
+    when: patch_linux_updated.rc == 0
 
-- name: set fact if FAILED
-  set_fact:
-    linux_patching_fact: "failed"
-    cacheable: yes
-  when: patch_linux_updated.failed == true
+  - name: set fact if FAILED
+    set_fact:
+      linux_patching_fact: "failed"
+      cacheable: yes
+    when: patch_linux_updated.failed == true
