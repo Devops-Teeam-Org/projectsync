@@ -1,0 +1,9 @@
+---
+- name: Add Host to Dynamic Inventory
+  hosts: 192.168.0.115
+  connection: local
+  gather_facts: no
+  become_user: root
+  tasks:
+  - name: test
+    ping:
