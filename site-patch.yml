@@ -15,8 +15,8 @@
     - always
 
 - name: Running 'Test' test Playbook
-  hosts: dynamic
-  ignore_unreachable: true
+  hosts: "{{ hostname }}"
+  ignore_unreachable: false
   gather_facts: true
   gather_subset:
     - '!all'
