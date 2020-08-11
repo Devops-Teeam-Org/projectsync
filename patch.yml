@@ -1,11 +1,11 @@
 ---
 - name: installing updated packages
-   yum:
-     security: yes
-     name: '*'
-     state: latest
-     exclude: kernel*
-   register: patch_linux_updated
+  yum:
+    security: yes
+    name: '*'
+    state: latest
+    exclude: kernel*
+  register: patch_linux_updated
 
 - name: set fact if COMPLETE
   set_fact:
