@@ -1,3 +1,4 @@
+---
 - name: installing updated packages
   yum:
     security: yes
