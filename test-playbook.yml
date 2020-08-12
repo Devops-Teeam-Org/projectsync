@@ -7,5 +7,5 @@
   tasks:
   
   - name: test
-    shel: whoami
+    shell: whoami
     register: username
