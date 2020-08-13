@@ -1,0 +1,42 @@
+---
+- name: About to create postgres database
+  hosts: postgresdb
+  gather_facts: true
+  user: postgres
+  vars:
+    db_name: postgres
+    login_host: postgres
+    login_user: postgres
+    login_pwd: Passwd@
+    table: test1_table
+    state: absent
+    path: /var/lib/pgsql/data/
+
+  tasks:
+  - name: Simple select query to acme db
+    postgresql_query:
+      db: ntekadmin
+      query: SELECT version()
+    register: version
+
+  - name: Create tablein the "{{ db_name }}" database
+    postgresql_table:
+      db: "{{ db_name }}"
+      name: "{{ table }}"
+      owner: "{{ db_name }}"
+    register: table
+
+  - name: Debugging outputs
+    debug:
+      var: table
+
+  - name: Create a new database in a tablespace
+    postgresql_db:
+      name: "{{ db_name }}_ntek"
+      state: "{{ state }}"
+
+  - name: Drop table foo from schema acme
+    postgresql_table:
+      db: "{{ db_name }}"
+      name: test1_table
+      state: "{{ state }}"
