@@ -25,5 +25,5 @@
   serial: "100%"
 
   roles:
-    - name: roles/postgres
+#    - name: roles/postgres
 #    - name: roles/installations
