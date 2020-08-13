@@ -1,1 +1,8 @@
 ---
+db_name: postgres
+login_host: postgres
+login_user: postgres
+login_pwd: Passwd@
+table: test1_table
+state: absent
+path: /var/lib/pgsql/data/
